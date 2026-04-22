@@ -62,14 +62,15 @@ website username encrypted_password
 ### Input Limits & Restrictions
 ```bash
 Username length: max ~100 characters
-Website name length: max ~100 characters
-Password length: max ~100 characters
-Master key length: max ~100 characters
+Website name length: max ~255 characters
+Password length: max ~255 characters
+Master key length: max ~255 characters
 ```
 ### Edge Cases & Constraints
 ```bash
 scanf does not accept spaces → inputs cannot contain spaces
 Inputs exceeding defined limits may cause buffer overflow
+Only integers allowed for menu input (invalid input may break flow)
 Wrong master key → decrypted password appears incorrect
 Corrupted data → automatically restored from backup
 Empty files → no credentials displayed
