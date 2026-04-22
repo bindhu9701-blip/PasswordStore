@@ -13,12 +13,12 @@ A command-line password manager written in C that allows users to securely store
 - Restore data if corruption is detected
 
 ---
-###  System Requirements
+##  System Requirements
 - GCC compiler (C11 or later recommended)  
 - OpenSSL library (`-lssl -lcrypto`)  
 - Linux / Unix-based system
 - ---
-### Build & Run
+## Build & Run
 
 Make sure OpenSSL is installed.
 
