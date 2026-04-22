@@ -69,7 +69,7 @@ void viewCredential(char *username, char *key)
     FILE *fptr = fopen(file, "r");
     char *site = malloc(MAX);
     char *id = malloc(MAX);
-    char *pwd = malloc(MAX);
+    char *pwd = malloc(MAX*2);
     if (fptr == NULL)
     {
         printf("NO CREDENTIALS ARE PRESENT\n");
@@ -105,7 +105,7 @@ int searchCredential(char *username, char *key)
     char *line = malloc(400);
     char *website = malloc(MAX);
     char *id = malloc(MAX);
-    char *pwd = malloc(MAX);
+    char *pwd = malloc(MAX*2);
     printf("Enter the website name for credentials: ");
     char *search = malloc(MAX);
     scanf("%s", search);
@@ -148,7 +148,7 @@ void updateCredential(char *username, char *key)
     FILE *ftmp = fopen("temp.csv", "w+");
     char *website = malloc(MAX);
     char *id = malloc(MAX);
-    char *pwd = malloc(MAX);
+    char *pwd = malloc(MAX*2);
     int found = 0;
     while (fscanf(fptr, "%s%s%s", website, id, pwd) == 3)
     {
