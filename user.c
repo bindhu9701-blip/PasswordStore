@@ -104,8 +104,8 @@ void Logout(char *username)
     scanf("%s", username);
     strcpy(file, "users.csv");
     sprintf(temp, "temp.csv");
-    char *id = malloc(100);
-    char *pwd = malloc(100);
+    char *id = malloc(MAX);
+    char *pwd = malloc(MAX);
     FILE *fptr = fopen(file, "r");
     FILE *ftmp = fopen(temp, "w");
     while (fscanf(fptr, "%s%s", id, pwd) == 2)
