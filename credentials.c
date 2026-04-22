@@ -16,12 +16,12 @@ Credential getCredential(char *username)
 Credential details;
 int checkCredential(char *username, Credential details)
 {
-    char *file = malloc(100);
+    char *file = malloc(MAX);
     GetUserFile(username, file);
     FILE *fptr = fopen(file, "r");
-    char *site = malloc(100);
-    char *id = malloc(100);
-    char *pwd = malloc(100);
+    char *site = malloc(MAX);
+    char *id = malloc(MAX);
+    char *pwd = malloc(MAX);
     int notfound = 1;
     while (fscanf(fptr, "%s%s%s", site, id, pwd) == 3)
     {
@@ -37,7 +37,7 @@ int checkCredential(char *username, Credential details)
 }
 void addCredential(char *username, char *key)
 {
-    char *file = malloc(200);
+    char *file = malloc(MAX);
     GetUserFile(username, file);
     FILE *fptr = fopen(file, "a");
     printf("Enter the details to add :\n");
@@ -45,9 +45,9 @@ void addCredential(char *username, char *key)
     if (checkCredential(username, details))
     {
         int len = strlen(details.pwd);
-        unsigned char data[100];
+        unsigned char data[MAX];
         memcpy(data, details.pwd, len);
-        char hex[200];
+        char hex[MAX * 2];
         EncryptDecrypt((unsigned char *)data, len, (unsigned char *)key, strlen(key));
         bytesToHex(data, len, hex);
         fprintf(fptr, "%s %s %s\n", details.site, details.id, hex);
@@ -64,12 +64,12 @@ void addCredential(char *username, char *key)
 }
 void viewCredential(char *username, char *key)
 {
-    char *file = malloc(100);
+    char *file = malloc(MAX);
     GetUserFile(username, file);
     FILE *fptr = fopen(file, "r");
-    char *site = malloc(100);
-    char *id = malloc(100);
-    char *pwd = malloc(100);
+    char *site = malloc(MAX);
+    char *id = malloc(MAX);
+    char *pwd = malloc(MAX);
     if (fptr == NULL)
     {
         printf("NO CREDENTIALS ARE PRESENT\n");
@@ -81,8 +81,8 @@ void viewCredential(char *username, char *key)
     }
     while (fptr != NULL && fscanf(fptr, "%s%s%s", site, id, pwd) == 3)
     {
-        unsigned char data[100];
-        char hex[200];
+        unsigned char data[MAX];
+        char hex[MAX * 2];
         strcpy(hex, pwd);
         int len = hexToBytes(pwd, data);
         data[len] = '\0';
@@ -99,23 +99,23 @@ void viewCredential(char *username, char *key)
 }
 int searchCredential(char *username, char *key)
 {
-    char *file = malloc(200);
+    char *file = malloc(MAX);
     GetUserFile(username, file);
     FILE *fptr = fopen(file, "r");
     char *line = malloc(400);
-    char *website = malloc(100);
-    char *id = malloc(100);
-    char *pwd = malloc(100);
+    char *website = malloc(MAX);
+    char *id = malloc(MAX);
+    char *pwd = malloc(MAX);
     printf("Enter the website name for credentials: ");
-    char *search = malloc(100);
+    char *search = malloc(MAX);
     scanf("%s", search);
     int found = 0;
     while (fscanf(fptr, "%s%s%s", website, id, pwd) == 3)
     {
         if (strcmp(website, search) == 0)
         {
-            unsigned char data[100];
-            char hex[200];
+            unsigned char data[MAX];
+            char hex[MAX * 2];
             strcpy(hex, pwd);
             int len = hexToBytes(pwd, data);
             data[len] = '\0';
@@ -142,22 +142,22 @@ void updateCredential(char *username, char *key)
     scanf("%s", details.id);
     printf("New Password: ");
     scanf("%s", details.pwd);
-    char *file = malloc(100);
+    char *file = malloc(MAX);
     GetUserFile(username, file);
     FILE *fptr = fopen(file, "r");
     FILE *ftmp = fopen("temp.csv", "w+");
-    char *website = malloc(100);
-    char *id = malloc(100);
-    char *pwd = malloc(100);
+    char *website = malloc(MAX);
+    char *id = malloc(MAX);
+    char *pwd = malloc(MAX);
     int found = 0;
     while (fscanf(fptr, "%s%s%s", website, id, pwd) == 3)
     {
         if (!strcmp(website, details.site) && !strcmp(id, details.id))
         {
             int len = strlen(details.pwd);
-            unsigned char data[100];
+            unsigned char data[MAX];
             memcpy(data, details.pwd, len);
-            char hex[200];
+            char hex[MAX * 2];
             EncryptDecrypt((unsigned char *)data, len, (unsigned char *)key, strlen(key));
             bytesToHex(data, len, hex);
             fprintf(ftmp, "%s %s %s\n", website, id, hex);
@@ -188,13 +188,13 @@ void deleteCredential(char *username)
     scanf("%s", details.site);
     printf("Username: ");
     scanf("%s", details.id);
-    char *file = malloc(100);
+    char *file = malloc(MAX);
     GetUserFile(username, file);
     FILE *fptr = fopen(file, "r");
     FILE *ftmp = fopen("temp.csv", "w+");
-    char *website = malloc(100);
-    char *id = malloc(100);
-    char *pwd = malloc(100);
+    char *website = malloc(MAX);
+    char *id = malloc(MAX);
+    char *pwd = malloc(MAX);
     int found = 0;
     while (fscanf(fptr, "%s%s%s", website, id, pwd) == 3)
     {

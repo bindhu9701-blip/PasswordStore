@@ -1,7 +1,7 @@
 #include <stdio.h>
 #ifndef Passwords
 #define Passwords
-
+#define MAX 256
 typedef struct Credential
 {
     char site[100];

@@ -6,8 +6,8 @@
 int checkUser(char *username)
 {
     // Check whether username exists or not
-    char *user = malloc(100);
-    char *pwd = malloc(100);
+    char *user = malloc(MAX);
+    char *pwd = malloc(MAX);
     FILE *fptr = fopen("users.csv", "r");
     while (fscanf(fptr, "%s%s", user, pwd) == 2)
     {
@@ -28,8 +28,8 @@ int CheckLoginDetails(char *username, char *pwd)
 {
     // If pwd and username matches return 1;
     FILE *fptr = fopen("users.csv", "r");
-    char *id = malloc(100);
-    char *pass = malloc(100);
+    char *id = malloc(MAX);
+    char *pass = malloc(MAX);
     while (fscanf(fptr, "%s%s", id, pass) == 2)
     {
         char *hash_pwd = malloc(65);
@@ -54,7 +54,7 @@ int signup()
     // Signup for new users
     FILE *fptr = fopen("users.csv", "a");
     printf("Enter Username : ");
-    char id[100], pwd[100];
+    char id[MAX], pwd[MAX];
     scanf("%s", id);
     int isfound = checkUser(id);
     if (!isfound)
@@ -65,6 +65,7 @@ int signup()
         hashPassword(pwd, hash_pwd);
         fprintf(fptr, "%s %s\n", id, hash_pwd);
         printf("----SigUp Completed!!----\n");
+        free(hash_pwd);
     }
     else
         printf("This Username already exists !!\n");
@@ -75,11 +76,11 @@ int login(char *username)
 {
     // To get credentials
     printf("Enter your details: \nUsername: ");
-    char *pwd = malloc(100);
+    char *pwd = malloc(MAX);
     scanf("%s", username);
     printf("Password: ");
     scanf("%s", pwd);
-    char *file = malloc(100);
+    char *file = malloc(MAX);
     strcpy(file, "users.csv");
     FILE *fptr = fopen(file, "a");
     if (fptr == NULL)
@@ -97,8 +98,8 @@ int login(char *username)
 void Logout(char *username)
 {
     // To delete their account
-    char *file = malloc(100);
-    char *temp = malloc(100);
+    char *file = malloc(MAX);
+    char *temp = malloc(MAX);
     printf("Type your Username :");
     scanf("%s", username);
     strcpy(file, "users.csv");
@@ -112,8 +113,8 @@ void Logout(char *username)
         if (strcmp(username, id) != 0)
             fprintf(ftmp, "%s %s\n", id, pwd);
     }
-    char *userfile = malloc(100);
-    char *userbackupfile = malloc(100);
+    char *userfile = malloc(MAX);
+    char *userbackupfile = malloc(MAX);
     sprintf(userfile, "users_%s.csv", username);
     sprintf(userbackupfile, "./backup/users_%s.bak", username);
     fclose(fptr);

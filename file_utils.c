@@ -51,8 +51,8 @@ void GetUserFile(char *username, char *file)
 }
 void CreateBackup(char *username)
 {
-    char *file = malloc(100);
-    char *backup = malloc(100);
+    char *file = malloc(MAX);
+    char *backup = malloc(MAX);
     GetUserFile(username, file);
     sprintf(backup, "./backup/users_%s.bak", username);
     FILE *fptr1 = fopen(file, "r");
@@ -77,8 +77,8 @@ void CreateBackup(char *username)
 }
 void RestoreBackup(char *username)
 {
-    char *file = malloc(100);
-    char *backup = malloc(100);
+    char *file = malloc(MAX);
+    char *backup = malloc(MAX);
     sprintf(file, "users_%s.csv", username);
     sprintf(backup, "./backup/users_%s.bak", username);
     FILE *fptr2 = fopen(file, "w");
@@ -124,8 +124,8 @@ void CreateFolder()
 int VerifyCheckSum(char *username)
 {
     int c;
-    char *file = malloc(100);
-    char *backup = malloc(100);
+    char *file = malloc(MAX);
+    char *backup = malloc(MAX);
     GetUserFile(username, file);
     sprintf(backup, "./backup/users_%s.bak", username);
     int currSum = GenerateCheckSum(file);

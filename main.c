@@ -8,7 +8,7 @@
 int main()
 {
     int choice;
-    char Username[100];
+    char Username[MAX];
     CreateFolder();
     while (1)
     {
@@ -26,7 +26,7 @@ int main()
                 printf("----SignUp Failed!!----\n");
             break;
         case 2:
-            char *key = malloc(100);
+            char *key = malloc(MAX);
             if (login(Username))
             {
                 printf("----Welcome %s---\n", Username);
@@ -52,7 +52,10 @@ int main()
             exit(0);
             break;
         default:
-            printf("____Invalid choice ____");
+            printf("____Invalid choice ____\n");
+            break;
         }
+        if (choice < 1 || choice > 4)
+            break;
     }
 }
