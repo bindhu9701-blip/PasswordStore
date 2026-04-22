@@ -26,6 +26,6 @@ make
 or manually
 
 ```bash
-gcc \*.c -o password_manager -lssl -lcrypto
+gcc *.c -o password_manager -lssl -lcrypto
 ./password_manager
 ```
