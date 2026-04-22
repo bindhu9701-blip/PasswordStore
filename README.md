@@ -66,5 +66,12 @@ Website name length: max ~100 characters
 Password length: max ~100 characters
 Master key length: max ~100 characters
 ```
-
-
+### Edge Cases & Constraints
+```bash
+scanf does not accept spaces → inputs cannot contain spaces
+Inputs exceeding defined limits may cause buffer overflow
+Wrong master key → decrypted password appears incorrect
+Corrupted data → automatically restored from backup
+Empty files → no credentials displayed
+Large passwords may fail if buffer sizes are insufficient
+```
